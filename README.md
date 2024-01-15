@@ -6,7 +6,7 @@ Ce projet a pour but d'archiver le travail réalisé durant le semestre pour la 
 
 ## Membres du projet
 
-- [Alexandre Lou-Poueyou](github.com/AlexLoup33)
+- [Alexandre Lou-Poueyou](https://github.com/AlexLoup33)
 
 ## Organisation du projet
 

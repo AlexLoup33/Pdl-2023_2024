@@ -28,7 +28,7 @@ git clone https://github.com/AlexLoup33/Pdl-2023_2024.git
 
 Aller dans le répertoire TP1
 ```bash
-cd TP/TP1
+cd TP/TP1/backend
 ```
 
 Compiler et lancer le démarrage du serveur

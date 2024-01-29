@@ -64,11 +64,15 @@ public class ImageController {
   public ResponseEntity<?> addImage(@RequestParam("file") MultipartFile file,
       RedirectAttributes redirectAttributes) {
         Image img;
-        try {
-          img = new Image(file.getOriginalFilename(), file.getBytes());
-          imageDao.create(img);
-        } catch (IOException e) {
-          return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        if (file.getOriginalFilename().endsWith(".jpg")){
+          try {
+            img = new Image(file.getOriginalFilename(), file.getBytes());
+            imageDao.create(img);
+          } catch (IOException e) {
+            return new ResponseEntity<>(HttpStatus.UNSUPPORTED_MEDIA_TYPE);
+          }
+        }else{
+          return new ResponseEntity<>(HttpStatus.UNSUPPORTED_MEDIA_TYPE);
         }
         return new ResponseEntity<>(HttpStatus.OK);
   }

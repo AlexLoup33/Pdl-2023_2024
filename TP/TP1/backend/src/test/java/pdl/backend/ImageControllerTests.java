@@ -13,8 +13,10 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -33,49 +35,51 @@ public class ImageControllerTests {
 	@Test
 	@Order(1)
 	public void getImageListShouldReturnSuccess() throws Exception {
-		// TODO
+		this.mockMvc.perform(get("/images")).andDo(print()).andExpect(status().isOk());
 	}
 
 	@Test
 	@Order(2)
 	public void getImageShouldReturnNotFound() throws Exception {
-		// TODO
+		this.mockMvc.perform(get("/images/150")).andDo(print()).andExpect(status().isNotFound());
 	}
 
 	@Test
 	@Order(3)
 	public void getImageShouldReturnSuccess() throws Exception {
-		// TODO
+		this.mockMvc.perform(get("/images/0")).andDo(print()).andExpect(status().isOk());
 	}
 
 	@Test
 	@Order(4)
 	public void deleteImagesShouldReturnMethodNotAllowed() throws Exception {
-		// TODO
+		this.mockMvc.perform(delete("/images")).andDo(print()).andExpect(status().isMethodNotAllowed());
 	}
 
 	@Test
 	@Order(5)
 	public void deleteImageShouldReturnNotFound() throws Exception {
-		// TODO
+		this.mockMvc.perform(delete("/images/150")).andDo(print()).andExpect(status().isNotFound());
 	}
 
 	@Test
 	@Order(6)
 	public void deleteImageShouldReturnSuccess() throws Exception {
-		// TODO
+		this.mockMvc.perform(delete("/images/0")).andDo(print()).andExpect(status().isOk());
 	}
 
 	@Test
 	@Order(7)
 	public void createImageShouldReturnSuccess() throws Exception {
-		// TODO
+		MockMultipartFile file = new MockMultipartFile("file", "../main/resources/test.jpg", "image/jpg", "test.jpg".getBytes());
+		this.mockMvc.perform(MockMvcRequestBuilders.multipart("/images").file(file)).andDo(print()).andExpect(status().isOk());
 	}
 
 	@Test
 	@Order(8)
 	public void createImageShouldReturnUnsupportedMediaType() throws Exception {
-		// TODO
+		MockMultipartFile file = new MockMultipartFile("file", "../main/ressources/truc.png", "image/png", "truc.png".getBytes());
+		this.mockMvc.perform(MockMvcRequestBuilders.multipart("/images").file(file)).andDo(print()).andExpect(status().isUnsupportedMediaType());
 	}
 	
 }

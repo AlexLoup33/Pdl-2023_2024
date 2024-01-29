@@ -45,3 +45,7 @@ curl -X POST -F "file=@<pwd>" "http://localhost:8080/images"
 curl -X DELETE "http://localhost:8080/images/<id>"
 ```
 
+Pour essayer les tests unitaires, lancer la commande suivante :
+```bash
+mvn test
+```
